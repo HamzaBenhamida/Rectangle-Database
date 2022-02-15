@@ -22,7 +22,7 @@ addBtn.addEventListener('click', () => {
 
 	//insert Name Cell
 	let cell0 = newRow.insertCell(0);
-	let text = 'name ' + numRectangle;
+	let text = 'n;
 	let name = document.createTextNode(text);
 	cell0.appendChild(name);
 
