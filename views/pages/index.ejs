@@ -13,16 +13,16 @@
     <form>
 	<table id="table">
 		<tr>
+			<th></th>
 			<th>Name</th>
 			<th>Color</th>
 			<th></th>
-			<th></th>
 		</tr>
 		<tr class='rectangles'>
-			<td><a href="/rect_db.ejs"'>name 1</td>
+			<th></th>
+			<td><a href="/rect_db.ejs">name 1</td>
 			<td>color</td>
 			<td><button id="delete1">DELETE</button></td>
-			<td><button id="update1">UPDATE</button></td>
 		</tr>
 	</table>
    </form>
@@ -31,15 +31,17 @@
 	<button id="view-all" onclick='location.href="./view-all.ejs"'>VIEW ALL</button>
 	<button id="delete-all" >DELETE ALL</button>
 
-	<form action="/" method="POST">
-		<br><br><label for="input-name">Name:</label><br>
+	<form action="/addrectangle" method="post">
+		<br><br><label for="input-uid">UID:</label><br>
+		<input type="number" id="input-uid" name="input-uid"><br>
+		<label for="input-name">Name:</label><br>
   		<input type="text" id="input-name" name="input-name"><br>
   		<label for="input-color">Color:</label><br>
   		<input type="text" id="input-color" name="input-color"><br>
 		<label for="input-width">Width:</label><br>
   		<input type="number" id="input-width" name="input-width"><br>
 		<label for="input-height">Height:</label><br>
-  		<input type="number" id="input-height" name="input-height"><br><br>
+  		<input type="number" id="input-height" name="input-height" value="send to server"><br><br>
 		<input id='add' type="submit" value="ADD">
 	</form>
 
