@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rectangle Database</title>
+    <link href="./stylesheets/main.css" rel="stylesheet">
+    <script src="./main.js" defer></script>
+
+  </head>
+  <body>
+    <h1>Rectangle Database</h1>
+
+	<table id="table">
+		<tr>
+			<th>UID</th>
+			<th>Name</th>
+			<th>Color</th>
+			<th>Option</th>
+		</tr>
+		<% rows.forEach(function(r) { %>
+		<tr>
+			    <td><%= r.uid %></td>
+			    <td><a href="/display_rec.ejs"><%= r.name %></a></td>
+			    <td><%= r.color %></td>
+			    <td><form action="/deleterectangle" method="post">
+			    <input id='<%= r.uid %>' type="submit" value="DELETE">
+			    </form></td>
+		</tr>
+		<% }); %>
+	</table>
+
+	<br>
+	<button id="delete-all" >DELETE ALL</button>
+
+	<form action="/addrectangle" method="post">
+		<br><br><label for="input-name">Name:</label><br>
+  		<input type="text" id="input-name" name="input-name"><br>
+  		<label for="input-color">Color:</label><br>
+  		<input type="text" id="input-color" name="input-color"><br>
+		<label for="input-width">Width:</label><br>
+  		<input type="number" id="input-width" name="input-width"><br>
+		<label for="input-height">Height:</label><br>
+  		<input type="number" id="input-height" name="input-height" value="send to server"><br><br>
+		<input id='add' type="submit" value="ADD">
+	</form>
+
+  </body>
+</html>
