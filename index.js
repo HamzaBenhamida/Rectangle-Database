@@ -27,8 +27,8 @@ app.get('/database', (req,res) => {
 
   var viewAllQuery = `SELECT * FROM rec`;
   pool.query(viewAllQuery, (error,result) => {
-    if(error)
-      console.log(error);
+    //if(error)
+      //console.log(error);
       //res.end(error);
 
     console.log(result);
@@ -41,8 +41,8 @@ app.get('/database', (req,res) => {
 //UPDATE values in display_rec.ejs
 app.get('/display', (req,res) => {
 
-  var selectRecQuery = `SELECT * FROM rec where `;
-  pool.query(viewAllQuery, (error,result) => {
+  var selectRecQuery = `SELECT * FROM rec `;
+  pool.query(selectRecQuery, (error,result) => {
     if(error)
       console.log(error);
       //res.end(error);
@@ -59,28 +59,35 @@ app.post('/addrectangle', (req,res) => {
   let ending = '...'
 
   //checking for errors in format of inputs
-  var name = req.body.input-name;
-  if(name.lenght > 20){
+  var name = req.body.inputName;
+  console.log(name)
+  if(name.length > 20){
     name = name.substring(0, 20 - ending.length) + ending;
   }
-  var color = req.body.input-color;
-  if(name.lenght > 20){
+ 
+  var color = req.body.inputColor;
+  console.log(color)
+  if(name.length > 20){
     color = color.substring(0, 20 - ending.length) + ending;
   }
-  var width = req.body.input-width;
+  var width = req.body.inputWidth;
+  console.log(width)
   if (width<0){
     width = Math.abs(width);
   }
-  var height = req.body.input-height;
+  
+  var height = req.body.inputHeight;
+  console.log(height)
   if (height<0){
      height = Math.abs(height);
   }
 
+  console.log(name,height,color, width)
   // ADD RECTANGLE TO THE DATABASE
-  var addRectangleQuery = `INSERT INTO rec values (DEFAULT, '${name}', ${width}, ${height},'${color}') `;
+  var addRectangleQuery = `INSERT INTO rec (name,width,height,color) values ('${name}', ${width}, ${height},'${color}') `;
   pool.query(addRectangleQuery, (error,result) => {
-    if(error)
-      console.log(error);
+    //if(error)
+      //console.log(error);
 
     res.redirect('/database');
   })
@@ -93,11 +100,11 @@ app.post('/updaterectangle', (req,res) => {
 
   //checking for errors in format of inputs
   var name = req.body.input-name;
-  if(name.lenght > 20){
+  if(name.length > 20){
     name = name.substring(0, 20 - ending.length) + ending;
   }
   var color = req.body.input-color;
-  if(name.lenght > 20){
+  if(name.length > 20){
     color = color.substring(0, 20 - ending.length) + ending;
   }
   var width = req.body.input-width;
@@ -109,8 +116,10 @@ app.post('/updaterectangle', (req,res) => {
      height = Math.abs(height);
   }
 
+
+  //console.log(name,height,color, width)
   // ADD RECTANGLE TO THE DATABASE
-  var updateRectangleQuery = `INSERT INTO rec values (DEFAULT, '${name}', ${width}, ${height},'${color}') `;
+  var updateRectangleQuery = `INSERT INTO rec (name,width,height,color) values ('${name}', ${width}, ${height},'${color}') `;
   pool.query(updateRectangleQuery, (error,result) => {
     if(error)
       console.log(error);
@@ -121,12 +130,12 @@ app.post('/updaterectangle', (req,res) => {
 });
 
 // DELETE rectangle
-app.post('/deleterectangle', (req,res) => {
+app.get('/deleterectangle/:id/delete', (req,res) => {
   console.log(req);
-  let uid = req.body.id;
+  let uid =  req.params.id;
   console.log(uid);
 
-  let deleteRectangleQuery = `DELETE from rec WHERE uid=${uid}`;
+  let deleteRectangleQuery = `DELETE from rec WHERE uid='${uid}'`;
   pool.query(deleteRectangleQuery, (error,result) => {
     if(error)
       console.log(error);

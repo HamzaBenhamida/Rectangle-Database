@@ -22,8 +22,8 @@
 			    <td><%= r.uid %></td>
 			    <td><a href="/display_rec.ejs"><%= r.name %></a></td>
 			    <td><%= r.color %></td>
-			    <td><form action="/deleterectangle" method="post">
-			    <input id='<%= r.uid %>' type="submit" value="DELETE">
+			    <td><form action="/deleterectangle/<%= r.uid %>/delete" method="get">
+			    <input id='<%= r.uid %>' type="submit" value="DELETE"/>
 			    </form></td>
 		</tr>
 		<% }); %>
@@ -32,16 +32,16 @@
 	<br>
 	<button id="delete-all" >DELETE ALL</button>
 
-	<form action="/addrectangle" method="post">
+	<form action="/addrectangle" method="post" id="add-rectangle-form">
 		<br><br><label for="input-name">Name:</label><br>
-  		<input type="text" id="input-name" name="input-name"><br>
+  		<input type="text" id="input-name" name="inputName"/><br>
   		<label for="input-color">Color:</label><br>
-  		<input type="text" id="input-color" name="input-color"><br>
+  		<input type="text" id="input-color" name="inputColor"/><br>
 		<label for="input-width">Width:</label><br>
-  		<input type="number" id="input-width" name="input-width"><br>
+  		<input type="number" id="input-width" name="inputWidth"/><br>
 		<label for="input-height">Height:</label><br>
-  		<input type="number" id="input-height" name="input-height" value="send to server"><br><br>
-		<input id='add' type="submit" value="ADD">
+  		<input type="number" id="input-height" name="inputHeight" /><br><br>
+		<input id='add' type="submit" value="ADD" form="add-rectangle-form"/>
 	</form>
 
   </body>
