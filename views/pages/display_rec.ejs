@@ -4,42 +4,74 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+	<link rel="stylesheet" href="./stylesheets/style.css"> 
 	<title>Display_rectangle</title>
 </head>
 <body>
-	<h1><%= rows.name %>'s Rectangle</h1>
+
+
+	<% results.forEach(function(r) { %>
+	
+	<h1><%= r.name %>'s Rectangle</h1>
+	
+	<!-- <canvas width="<%= r.width %>" height="<%= r.height %>" style="border:1px solid " fillStyle= "<%= r.color %>">
+	</canvas> -->
+
+	<div>
+                <canvas class= "CanvasSize" id="myCanvas"></canvas>
+                <ul>
+                    <% results.forEach(function(r) { %>
+                        <script>
+                        var canvas = document.getElementById("myCanvas");
+                        var ctx = canvas.getContext("2d");
+                        canvas.width = '<%= r.width %>';
+                        canvas.height = '<%= r.height %>';
+                        ctx.beginPath();
+                        ctx.fillStyle = '<%= r.color %>';
+                        ctx.fillRect(0, 0, '<%= r.width %>', '<%= r.height %>');
+                        ctx.fillStyle = 'black';
+                        ctx.font = '25px Courier';
+                        ctx.fillText(`<%= r.name %>`, 0, '<%= r.height %>' / 2);
+                        </script> 
+                    <% }); %>
+                </ul>
+            </div>
 	
 	<table id="table">
 		<tr>
 			<th>Name</th>
-			<th><%= rows.name %></th>
+			<th><%= r.name %></th>
 		</tr>
 		<tr>
 			<th>Color</th>
-			<th><%= rows.color %></th>
+			<th><%= r.color %></th>
 		</tr>
 		<tr>
 			<th>Width</th>
-			<th><%= rows.width %></th>
+			<th><%= r.width %></th>
 		</tr>
 		<tr>
 			<th>Height</th>
-			<th><%= rows.height %></th>
+			<th><%= r.height %></th>
 		</tr>
 	</table>
 	
-	<form action="/updaterectangle" method="post">
+	<form value="<%= r.uid %>" action="/updaterectangle" method="post" name="updateForm">
+		<input name = uid type = 'hidden' value = '<%= r.uid %>'>
 		<br><br><label for="input-name">Name:</label><br>
-  		<input type="text" id="input-name" name="input-name"><br>
+  		<input type="text" id="input-name" name="inputName"><br>
   		<label for="input-color">Color:</label><br>
-  		<input type="text" id="input-color" name="input-color"><br>
+  		<input type="text" id="input-color" name="inputColor"><br>
 		<label for="input-width">Width:</label><br>
-  		<input type="number" id="input-width" name="input-width"><br>
+  		<input type="number" id="input-width" name="inputWidth"><br>
 		<label for="input-height">Height:</label><br>
-  		<input type="number" id="input-height" name="input-height" value="send to server"><br><br>
-		<input id='update' type="submit" value="UPDATE">
+  		<input type="number" id="input-height" name="inputHeight" ><br><br>
+		<input id='update' type="submit" value="UPDATE" >
 	</form>
+	<% }); %>
 
+	<br> <br>
 	<button><a onclick='location.href="/database"'>GO BACK</a></button>
+
 </body>
 </html>

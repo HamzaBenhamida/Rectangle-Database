@@ -20,7 +20,7 @@
 		<% rows.forEach(function(r) { %>
 		<tr>
 			    <td><%= r.uid %></td>
-			    <td><a href="/display_rec.ejs"><%= r.name %></a></td>
+			    <td><a href='/<%= r.uid %>'><%= r.name %></a></td>
 			    <td><%= r.color %></td>
 			    <td><form action="/deleterectangle/<%= r.uid %>/delete" method="get">
 			    <input id='<%= r.uid %>' type="submit" value="DELETE"/>
@@ -30,7 +30,6 @@
 	</table>
 
 	<br>
-	<button id="delete-all" >DELETE ALL</button>
 
 	<form action="/addrectangle" method="post" id="add-rectangle-form">
 		<br><br><label for="input-name">Name:</label><br>
